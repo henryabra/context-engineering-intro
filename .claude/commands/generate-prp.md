@@ -1,88 +1,241 @@
-# Create PRP
+# Generate Product Requirements Prompt (PRP)
 
-YOU MUST DO IN-DEPTH RESEARCH, FOLLOW THE <RESEARCH PROCESS>
+## Overview
+Generate comprehensive Product Requirements Prompt documents that enable one-pass implementation success through exhaustive research and detailed planning.
 
-<RESEARCH PROCESS>
+## Arguments
+**Feature file**: `$ARGUMENTS` (typically `INITIAL.md` or `PRD.md`)
 
-   - Don't only research one page, and don't use your own webscraping tool - instead scrape many relevant pages from all documentation links mentioned in the initial.md file
-   - Take my tech as sacred truth, for example if I say a model name then research that model name for LLM usage - don't assume from your own knowledge at any point
-   - When I say don't just research one page, I mean do incredibly in-depth research, like to the ponit where it's just absolutely ridiculous how much research you've actually done, then when you creat the PRD document you need to put absolutely everything into that including INCREDIBLY IN DEPTH CODE EXMAPLES so any AI can pick up your PRD and generate WORKING and COMPLETE production ready code.
+## 🔍 Research Phase (Critical)
 
-</RESEARCH PROCESS>
+### 1. Requirements Analysis
+- **Read the feature file completely** to understand scope and requirements
+- **Identify all technologies, models, and versions** mentioned as sacred specifications
+- **Extract all documentation URLs** provided in the DOCUMENTATION section
+- **Note specific examples** referenced in the EXAMPLES section
 
-## Feature file: $ARGUMENTS
+**🔍 Gap Analysis**: Only interact with user if critical information is missing:
+- **Missing technology versions**: If specific versions aren't specified
+- **Ambiguous requirements**: If feature descriptions lack clarity
+- **Incomplete documentation**: If essential documentation URLs are missing
 
-Generate a complete PRP for general feature implementation with thorough research. Ensure context is passed to the AI agent to enable self-validation and iterative refinement. Read the feature file first to understand what needs to be created, how the examples provided help, and any other considerations.
+### 2. Comprehensive Codebase Analysis
+**Analysis Standards**: Understand existing patterns to the point where you know exactly how to integrate new features
 
-The AI agent only gets the context you are appending to the PRP and training data. Assuma the AI agent has access to the codebase and the same knowledge cutoff as you, so its important that your research findings are included or referenced in the PRP. The Agent has Websearch capabilities, so pass urls to documentation and examples.
+- **Map file structure** and architectural patterns currently in use
+- **Identify existing technologies** and their integration patterns
+- **Find similar implementations** in the codebase to learn from
+- **Discover testing patterns** and validation approaches used
+- **Note configuration patterns** and environment setup
+- **Understand naming conventions** and coding standards
+- **Check build/deployment processes** and tooling
 
-## Research Process
+**🔍 Gap Analysis**: Only interact with user if conflicts are found:
+- **Conflicting patterns**: If multiple incompatible approaches exist in codebase
+- **Missing validation commands**: If no testing/linting commands are discoverable
+- **Unclear integration**: If existing patterns don't clearly apply to new feature
 
-1. **Codebase Analysis**
-   - Search for similar features/patterns in the codebase
-   - Identify files to reference in PRP
-   - Note existing conventions to follow
-   - Check test patterns for validation approach
+### 3. Gap Identification
+**Compare requirements against existing codebase to identify what external research is needed:**
 
-2. **External Research**
-   - Search for similar features/patterns online
-   - Library documentation (include specific URLs)
-   - Implementation examples (GitHub/StackOverflow/blogs)
-   - Best practices and common pitfalls
-   - Don't only research one page, and don't use your own webscraping tool - instead scrape many relevant pages from all documentation links mentioned in the initial.md file
-   - Take my tech as sacred truth, for example if I say a model name then research that model name for LLM usage - don't assume from your own knowledge at any point
-   - When I say don't just research one page, I mean do incredibly in-depth research, like to the ponit where it's just absolutely ridiculous how much research you've actually done, then when you creat the PRD document you need to put absolutely everything into that including INCREDIBLY IN DEPTH CODE EXMAPLES so any AI can pick up your PRD and generate WORKING and COMPLETE production ready code.
+- **Missing technologies**: Technologies mentioned in requirements but not found in codebase
+- **Integration gaps**: How to connect new technologies with existing patterns
+- **Pattern gaps**: Implementation approaches not represented in current codebase
+- **Validation gaps**: Testing or quality assurance approaches not currently used
 
-3. **User Clarification** (if needed)
-   - Specific patterns to mirror and where to find them?
-   - Integration requirements and where to find them?
+### 4. Targeted External Research
+**Research Standards**: For identified gaps, research to the point where it's "absolutely ridiculous how much research you've done"
 
-## PRP Generation
+- **Use Jina MCP** to scrape documentation for gap-identified technologies only
+- **Focus on integration patterns** rather than comprehensive overviews
+- **Research exact versions/models** specified (treat as sacred truth)
+- **Target specific documentation** that addresses the identified gaps
+- **Store research systematically** in `/research/` directory:
+  ```
+  /research/
+  ├── [technology-name]/
+  │   ├── api-reference.md
+  │   ├── getting-started.md
+  │   ├── examples.md
+  │   └── best-practices.md
+  ```
 
-Generate 2 Phases
+### 5. Implementation Pattern Research
+- **Combine codebase patterns with external research** for gap areas
+- **Find working code examples** for each technology combination not in codebase
+- **Research best practices** and common pitfalls for new technologies
+- **Identify error handling patterns** for the specific technologies
+- **Document integration requirements** between existing and new components
+- **Plan minimal changes** that build on existing patterns
 
-Phase 1: Skeleton Code with detailed implementation comments on exactly how to implement it
-Phase 2: Full and complete production ready code with every single feature fully implemented
+## 🧠 Strategic Planning (Ultrathink)
 
-Using PRPs/templates/prp_base.md as template:
+**Before writing the PRP, engage deep strategic thinking:**
 
-### Critical Context to Include and pass to the AI agent as part of the PRP
-- **Documentation**: URLs with specific sections
-- **Code Examples**: Real snippets from codebase
-- **Gotchas**: Library quirks, version issues
-- **Patterns**: Existing approaches to follow
+1. **Architecture decisions**: How do components interact?
+2. **Implementation sequence**: What order ensures success?
+3. **Risk assessment**: What could go wrong and how to prevent it?
+4. **Validation strategy**: How to verify each component works?
+5. **Context completeness**: What would another AI need to succeed?
 
-### Implementation Blueprint
-- Start with pseudocode showing approach
-- Reference real files for patterns
-- Include error handling strategy
-- list tasks to be completed to fullfill the PRP in the order they should be completed
+**🔍 Gap Analysis**: Only interact with user if architectural decisions are unclear:
+- **Multiple viable approaches**: If research reveals equally valid architectural options
+- **High-risk decisions**: If implementation choices could significantly impact the system
+- **Insufficient context**: If requirements don't provide enough detail for critical decisions
 
-### Validation Gates (Must be Executable) eg for python
+## 📋 PRP Generation
+
+### Phase Structure
+Generate **two separate PRP files**:
+
+**Phase 1**: `PRPs/phase-1-[feature-name].md` - **Working Skeleton**
+- **Must compile and run successfully** - All syntax correct, imports resolved
+- **Core functionality implemented** - Basic happy path works end-to-end
+- **Test structure in place** - Tests are written but may fail for complex scenarios
+- **Focus on reducing AI cognitive load** - Implement the basic flow without edge cases
+- **Minimal error handling** - Prevent crashes but don't handle all scenarios
+- **Detailed implementation comments** explaining what Phase 2 needs to complete
+- **Working integration points** - Components connect and communicate properly
+
+**Phase 2**: `PRPs/phase-2-[feature-name].md` - **Production Ready**
+- **All tests must pass** - Including edge cases and complex scenarios
+- Complete feature implementation with comprehensive validation
+- Robust error handling and recovery mechanisms
+- Full test suite (expected use, edge cases, failure cases)
+- Performance optimization and monitoring
+- Advanced features and user experience enhancements
+
+### Required PRP Sections
+
+#### 1. Context & Research Summary
+- **Codebase analysis**: Existing patterns, technologies, and conventions found
+- **Technology stack**: Exact versions and models (existing + new)
+- **Gap analysis**: What external research was needed and why
+- **Documentation sources**: URLs with specific sections referenced for gaps
+- **Key insights**: Critical findings from codebase analysis and gap research
+- **Integration strategy**: How new features will build on existing patterns
+
+#### 2. Implementation Blueprint
+- **Pseudocode outline**: Step-by-step implementation approach
+- **File structure**: Specific files to create/modify with rationale
+- **Dependencies**: External libraries and their integration points
+- **Configuration**: Environment variables and setup requirements
+
+#### 3. Detailed Implementation Plan
+- **Task sequence**: Ordered list of implementation steps
+- **Code examples**: Working snippets from research for each major component
+- **Integration points**: How components connect and communicate
+- **Error handling**: Specific strategies for each failure mode
+
+#### 4. Validation Gates
+**Must be executable commands** appropriate for the project:
+
+**Phase 1 Validation** (focus on compilation and basic flow):
 ```bash
-# Syntax/Style
-ruff check --fix && mypy .
+# Compilation/Syntax Check (MUST PASS)
+# Example for Python: python -m py_compile src/*.py
+# Example for Node.js: npx tsc --noEmit
+# Example for general: make build
 
-# Unit Tests
-uv run pytest tests/ -v
+# Basic smoke test (SHOULD PASS - verify basic instantiation/connectivity)
+# Example for Python: python -c "import mymodule; mymodule.init()"
+# Example for Node.js: npm run test:smoke
+# Example for general: make test-smoke
 
+# Full test suite (MAY FAIL - run to see what Phase 2 needs to fix)
+# Example for Python: uv run pytest tests/ -v || true
+# Example for Node.js: npm test || true
+# Note: Use || true to prevent CI failure, but review failed tests
 ```
 
-*** CRITICAL AFTER YOU ARE DONE RESEARCHING AND EXPLORING THE CODEBASE BEFORE YOU START WRITING THE PRP ***
+**Phase 2 Validation** (comprehensive):
+```bash
+# Full test suite
+# Example for Python: uv run pytest tests/ -v --cov
+# Example for Node.js: npm test
+# Example for general: make test-all
 
-*** ULTRATHINK ABOUT THE PRP AND PLAN YOUR APPROACH THEN START WRITING THE PRP ***
+# Performance/Integration tests
+# Example for Python: uv run pytest tests/integration/ -v
+# Example for Node.js: npm run test:integration
+```
 
-## Output
-Save as: `PRPs/{phase-1-feature-name}.md`
-Save as: `PRPs/{phase-2-feature-name}.md`
+**🔍 Gap Analysis**: Only interact with user if validation is unclear:
+- **No discoverable commands**: If project lacks clear testing/validation setup
+- **Custom validation needed**: If feature requires specialized testing not found in codebase
 
-## Quality Checklist
-- [ ] All necessary context included
-- [ ] Validation gates are executable by AI
-- [ ] References existing patterns
-- [ ] Clear implementation path
-- [ ] Error handling documented
+#### 5. Quality Assurance
+- **Test coverage**: Specific test cases for each feature
+- **Performance criteria**: Response time and resource usage targets
+- **Security considerations**: Data handling and API security measures
+- **Monitoring**: How to verify the implementation works in production
 
-Score the PRP on a scale of 1-10 (confidence level to succeed in one-pass implementation using claude codes)
+## 📁 Output Requirements
 
-Remember: The goal is one-pass implementation success through comprehensive context.
+### File Naming
+- `PRPs/phase-1-[descriptive-feature-name].md`
+- `PRPs/phase-2-[descriptive-feature-name].md`
+
+### Content Standards
+- **Complete context**: Everything needed for successful implementation
+- **Working code examples**: Production-ready snippets from research
+- **Executable validation**: Commands that can be run to verify success
+- **Clear implementation path**: Step-by-step instructions with rationale
+
+## ✅ Quality Checklist
+
+Before finalizing each PRP, verify:
+
+**General Requirements:**
+- [ ] **Codebase understanding**: Existing patterns and conventions thoroughly analyzed
+- [ ] **Gap identification**: Clear understanding of what external research was needed
+- [ ] **Research completeness**: Sufficient documentation researched for identified gaps
+- [ ] **Technology accuracy**: Exact versions/models specified and researched
+- [ ] **Implementation clarity**: Clear step-by-step instructions
+- [ ] **Code examples**: Working snippets for each major component
+- [ ] **Context completeness**: Another AI could implement successfully
+- [ ] **Codebase alignment**: Builds on existing patterns and conventions
+
+**Phase 1 Specific Requirements:**
+- [ ] **Compilation guarantee**: Implementation must compile/build without errors
+- [ ] **Basic functionality**: Core happy path works end-to-end
+- [ ] **Test structure**: Tests are written (may fail for complex cases)
+- [ ] **Reduced cognitive load**: Focus on getting basic flow working
+- [ ] **Integration readiness**: Components connect properly with existing codebase
+
+**Phase 2 Specific Requirements:**
+- [ ] **All tests pass**: Including edge cases and complex scenarios
+- [ ] **Production readiness**: Comprehensive error handling and validation
+- [ ] **Performance optimization**: Meets performance criteria and monitoring
+- [ ] **Full test coverage**: Complete test suite with all scenarios
+
+## 📊 Success Metrics
+
+**Rate each PRP on confidence for one-pass implementation (1-10 scale):**
+- **10**: Guaranteed success with comprehensive context
+- **8-9**: High confidence with minor clarification potentially needed
+- **6-7**: Good foundation but may require iteration
+- **Below 6**: Requires more research and context
+
+**Target**: Every PRP should score 8+ for one-pass implementation success.
+
+**🔍 Final Gap Check**: Only interact with user if confidence is low:
+- **Confidence score below 7**: If PRP lacks sufficient context for reliable implementation
+- **Critical unknowns**: If essential implementation details remain unclear after research
+
+## 🎯 Remember
+
+The goal is **one-pass implementation success** through:
+- Comprehensive codebase analysis that reveals existing patterns
+- Targeted research that fills only the identified gaps
+- Complete context that enables autonomous implementation
+- Validated approaches that prevent common pitfalls
+- Clear instructions that guide successful execution
+- **Gap-driven clarification** only when essential information is missing
+
+## 💡 Gap Identification Guidelines
+
+- **Prefer inference over interaction**: Use research and codebase analysis to fill gaps
+- **Only ask when blocking**: User interaction should be last resort for critical unknowns
+- **Be specific**: When asking, provide context about what's missing and why it's needed
+- **Offer researched options**: Present alternatives discovered through research rather than open-ended questions
