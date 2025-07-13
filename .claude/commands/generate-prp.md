@@ -106,6 +106,13 @@ Generate **two separate PRP files**:
 - Performance optimization and monitoring
 - Advanced features and user experience enhancements
 
+### Incremental Implementation Support
+**Target for `/execute-prp --focus` compatibility:**
+- **Clear section headers** - Use descriptive headers that can be targeted with --focus parameter
+- **Logical section boundaries** - Ensure sections can be implemented independently when possible
+- **Phase numbering** - Include phase numbers in headers for easy wildcard targeting (e.g., "*Phase 1*")
+- **Dependency documentation** - Note when sections depend on others for proper sequencing
+
 ### Required PRP Sections
 
 #### 1. Context & Research Summary
