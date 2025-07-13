@@ -22,6 +22,7 @@ Generate comprehensive Product Requirements Prompt documents that enable one-pas
 ### 2. Comprehensive Codebase Analysis
 **Analysis Standards**: Understand existing patterns to the point where you know exactly how to integrate new features
 
+- **Read PLANNING.md first** to understand architecture, conventions, and constraints
 - **Map file structure** and architectural patterns currently in use
 - **Identify existing technologies** and their integration patterns
 - **Find similar implementations** in the codebase to learn from
